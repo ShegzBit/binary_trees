@@ -1,4 +1,5 @@
 #include "binary_trees.h"
+#define INSERT bst_insert
 
 
 /**
@@ -9,7 +10,13 @@
  */
 bst_t *array_to_bst(int *array, size_t size)
 {
-	(void)array;
-	(void)size;
-	return (NULL);
+	bst_t *tree = NULL;
+	size_t i;
+
+	if (!array)
+		return (NULL);
+	for (i = 0; i < size; i++)
+		INSERT(&tree, array[i]);
+
+	return (tree);
 }
