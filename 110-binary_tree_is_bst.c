@@ -27,7 +27,7 @@ int bst_helper(const bst_t *tree, int min, int max)
 {
 	if (!tree)
 		return (1);
-	if (min >= TN || max <= TN)
+	if (min > TN || max < TN)
 		return (0);
 	return (bst_helper(LEFT, min, TN - 1) && bst_helper(RIGHT, TN + 1, max));
 }
