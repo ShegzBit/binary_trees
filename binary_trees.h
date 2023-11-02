@@ -39,6 +39,7 @@ void shift_nodes(bst_t **tree, bst_t **node, bst_t **new);
 bst_t *successor(bst_t *root);
 bst_t *min(bst_t *root);
 bst_t *delete_node(bst_t **tree, bst_t **node);
+int is_avl_helper(const binary_tree_t *tree, int min, int max);
 
 /*Prototypes*/
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
