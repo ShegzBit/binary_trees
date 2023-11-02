@@ -6,6 +6,7 @@
 #define LEFT tree->left
 #define RIGHT tree->right
 
+
 /**
  * min - min
  * @root: root
@@ -69,48 +70,34 @@ bst_t *delete_node(bst_t **tree, bst_t **node)
 	bst_t *temp;
 
 	if (*(N_LEFT))
+	{
 		shift_nodes(tree, node, N_RIGHT);
+		free(*node);
+		return (*N_RIGHT);
+	}
 	else if (*(N_RIGHT))
+	{
 		shift_nodes(tree, node, N_LEFT);
+		free(*node);
+		return (*N_LEFT);
+	}
 	else
 	{
 		temp = successor(NODE);
 		if (temp->parent != NODE)
+		{
 			shift_nodes(tree, &temp, N_RIGHT);
-		temp->right = *(N_RIGHT);
-		temp->right->parent = temp;
+			temp->right = *(N_RIGHT);
+			if (temp->right)
+				temp->right->parent = temp;
+		}
 		temp->left = *(N_LEFT);
 		temp->left->parent = temp;
 		shift_nodes(tree, node, &temp);
+		free(*node);
 	}
 
-	return (*node);
-}
-
-/**
- * bst_search - searches for value in tree
- * @tree: tree to lookthrough
- * @value: value to lookup
- * Return: node conataining value
- */
-bst_t *bst_search(const bst_t *tree, int value)
-{
-	const bst_t *temp = NULL;
-
-	for (; tree;)
-	{
-		temp = tree;
-		if (value < tree->n)
-			tree = LEFT;
-		else if (value > tree->n)
-			tree = RIGHT;
-		else
-			break;
-	}
-
-	if (tree)
-		return ((bst_t *)temp);
-	return (NULL);
+	return (temp);
 }
 
 /**
@@ -122,10 +109,22 @@ bst_t *bst_search(const bst_t *tree, int value)
 bst_t *bst_remove(bst_t *root, int value)
 {
 	bst_t *node = NULL;
+	bst_t *tree = root;
+	bst_t *temp = NULL;
 
-	node = SEARCH(root, value);
+	for (; tree;)
+	{
+		temp = tree;
+		if (value < tree->n)
+			tree = tree->left;
+		else if (value > tree->n)
+			tree = tree->right;
+		else
+			break;
+	}
+	node = (tree ? (bst_t *)temp : NULL);
 	if (!node)
 		return (NULL);
 	delete_node(&root, &node);
-	return (node);
+	return (root);
 }
