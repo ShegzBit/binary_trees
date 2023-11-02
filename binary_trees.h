@@ -25,6 +25,8 @@ typedef struct binary_tree_s bst_t;
 
 typedef struct binary_tree_s heap_t;
 
+typedef struct binary_tree_s avl_t;
+
 typedef binary_tree_t bt_t;
 
 /*Utilities*/
@@ -33,6 +35,9 @@ int height_bt(const binary_tree_t *tree);
 size_t size_bt(const binary_tree_t *tree);
 int is_left(const binary_tree_t *tree);
 int complete_helper(const binary_tree_t *tree, size_t height);
+void shift_nodes(bst_t **tree, bst_t **node, bst_t **new);
+bst_t *successor(bst_t *root);
+bst_t *min(bst_t *root);
 
 /*Prototypes*/
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
@@ -67,4 +72,7 @@ bst_t *array_to_bst(int *array, size_t size);
 bst_t *bst_search(const bst_t *tree, int value);
 bst_t *bst_remove(bst_t *root, int value);
 int bst_helper(const bst_t *tree, int min, int max);
+avl_t *avl_insert(avl_t **tree, int value);
+avl_t *avl_remove(avl_t *root, int value);
+
 #endif /**/
