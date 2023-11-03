@@ -46,21 +46,25 @@ size_t size_bt(const binary_tree_t *tree)
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int h_equal = 0, n_equal = 0;
+	int h_equals = 0, n_equals = 0;
 	/*check if a tree is null*/
 	if (tree == NULL)
 		return (0);
+
 	binary_tree_is_perfect(tree->left);
 	binary_tree_is_perfect(tree->right);
+
 	/*if it has only one child*/
 	if ((tree->left && !tree->right) || (!tree->left && tree->right))
 		return (0);
+
 	/*if it has both child confirm they are of the same height*/
 	if (tree->left && tree->right)
 	{
-		h_equal = height_bt(tree->left) == height_bt(tree->right);
-		n_equal = size_bt(tree->left) == size_bt(tree->right);
-		return (h_equal & n_equal);
+		h_equals = height_bt(tree->left) == height_bt(tree->right);
+		n_equals = size_bt(tree->left) == size_bt(tree->right);
+		return (h_equals & n_equals);
 	}
+
 	return (0);
 }
