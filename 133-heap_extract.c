@@ -8,5 +8,5 @@
 int heap_extract(heap_t **root)
 {
 	(void)root;
-	return (1);
+	return (0);
 }
