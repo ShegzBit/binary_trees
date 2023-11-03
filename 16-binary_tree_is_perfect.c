@@ -50,6 +50,8 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	/*check if a tree is null*/
 	if (tree == NULL)
 		return (0);
+	if (!tree->left && !tree->right)
+		return (1);
 
 	binary_tree_is_perfect(tree->left);
 	binary_tree_is_perfect(tree->right);
